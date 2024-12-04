@@ -1,0 +1,33 @@
+{
+  "name": "setup-butler",
+  "version": "1.0.0",
+  "description": "A Github Action to setup the butler command line tools for itch.io content authoring.",
+  "author": "buildalon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buildalon/setup-butler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/buildalon/setup-butler/issues"
+  },
+  "homepage": "https://github.com/buildalon/setup-butler",
+  "main": "dist/index.js",
+  "keywords": [],
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/tool-cache": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@vercel/ncc": "^0.34.0",
+    "shx": "^0.3.4",
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run bundle",
+    "bundle": "ncc build src/index.ts -o dist --source-map --license licenses.txt",
+    "clean": "npm install && shx rm -rf dist/ out/ node_modules/ && npm ci"
+  }
+}

@@ -1,0 +1,21 @@
+name: 'Buildalon Setup Butler'
+description: A Github Action to setup the butler command line tools for itch.io content authoring.
+branding:
+  color: 'red'
+  icon: 'terminal'
+inputs:
+  api-key:
+    description: 'The API key for your itch.io account.'
+    required: true
+  version:
+    description: 'The version of the butler CLI to install.'
+    required: false
+    default: 'latest'
+  self-update:
+    description: 'Whether to update the butler CLI to the latest version.'
+    required: false
+    default: 'true'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+  post: 'dist/index.js'
