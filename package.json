@@ -1,6 +1,6 @@
 {
   "name": "setup-butler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Github Action to setup the butler command line tools for itch.io content authoring.",
   "author": "buildalon",
   "license": "MIT",

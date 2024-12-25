@@ -28380,7 +28380,7 @@ const variantMap = {
 };
 function getDownloadUrl(version) {
     const variant = variantMap[process.platform];
-    const baseUrl = 'https://broth.itch.ovh/butler/';
+    const baseUrl = 'https://broth.itch.zone/butler/';
     const archiveName = `butler-${variantMap[process.platform]}.zip`;
     return [`${baseUrl}${variant}/${version}/archive/default`, archiveName];
 }
