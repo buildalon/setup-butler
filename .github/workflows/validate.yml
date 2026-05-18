@@ -19,10 +19,10 @@ jobs:
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       # download and setup butler
       - uses: ./
-        name: RageAgainstThePixel/setup-butler
+        name: buildalon/setup-butler
         with:
           api-key: ${{ secrets.BUTLER_API_KEY }}
       # run butler
