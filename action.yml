@@ -1,5 +1,5 @@
 name: 'Buildalon Setup Butler'
-description: A Github Action to setup the butler command line tools for itch.io content authoring.
+description: 'A Github Action to setup the butler command line tools for itch.io content authoring.'
 branding:
   color: 'red'
   icon: 'terminal'
@@ -16,6 +16,6 @@ inputs:
     required: false
     default: 'true'
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'dist/index.js'
   post: 'dist/index.js'
