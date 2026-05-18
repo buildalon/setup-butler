@@ -1,6 +1,6 @@
 {
   "name": "setup-butler",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Github Action to setup the butler command line tools for itch.io content authoring.",
   "author": "buildalon",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "@actions/tool-cache": "^2.0.2"
   },
   "devDependencies": {
-    "@types/node": "^22.19.19",
+    "@types/node": "^24.12.4",
     "@vercel/ncc": "^0.34.0",
     "shx": "^0.4.0",
     "typescript": "^5.9.3"
