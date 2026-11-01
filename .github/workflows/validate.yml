@@ -18,12 +18,20 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, windows-latest, ubuntu-latest]
+        version: [latest, 15.21.0]
     steps:
       - uses: actions/checkout@v6
       # download and setup butler
       - uses: ./
+        id: setup-butler
         name: buildalon/setup-butler
         with:
           api-key: ${{ secrets.BUTLER_API_KEY }}
+          version: ${{ matrix.version }}
       # run butler
       - run: butler --version
+      - run: |
+          "$BUTLER_PATH" --version
+          echo "path: ${{ steps.setup-butler.outputs.path }}"
+          echo "version: ${{ steps.setup-butler.outputs.version }}"
+        shell: bash

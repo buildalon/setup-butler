@@ -3,6 +3,8 @@ import exec = require('@actions/exec');
 import io = require('@actions/io');
 import setup = require('./setup');
 import fs = require('fs');
+import os = require('os');
+import path = require('path');
 
 const IS_POST = !!core.getState('isPost');
 
@@ -23,14 +25,11 @@ const main = async () => {
             await exec.exec('butler', ['logout']);
             let cacheDir = '';
             switch (process.platform) {
-                case 'linux':
-                    cacheDir = '~/.config/itch';
-                    break;
                 case 'darwin':
-                    cacheDir = '~/Library/Application Support/itch';
+                    cacheDir = path.join(os.homedir(), 'Library', 'Application Support', 'itch');
                     break;
-                case 'win32':
-                    cacheDir = '%USERPROFILE%\\.config\\itch';
+                default:
+                    cacheDir = path.join(os.homedir(), '.config', 'itch');
                     break;
             }
             try {

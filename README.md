@@ -1,4 +1,4 @@
-# setup-butler
+# Buildalon Setup Butler
 
 [![Discord](https://img.shields.io/discord/939721153688264824.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/VM9cWJ9rjH) [![marketplace](https://img.shields.io/static/v1?label=&labelColor=505050&message=Buildalon%20Actions&color=FF1E6F&logo=github-actions&logoColor=0076D6)](https://github.com/marketplace?query=buildalon) [![validate](https://github.com/buildalon/setup-butler/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/buildalon/setup-butler/actions/workflows/validate.yml)
 
@@ -17,7 +17,7 @@ jobs:
         os: [macos-latest, windows-latest, ubuntu-latest]
     steps:
       # download and setup butler
-      - uses: buildalon/setup-butler@v1
+      - uses: buildalon/setup-butler@v2
         with:
           api-key: ${{ secrets.BUTLER_API_KEY }}
       # run butler commands
@@ -28,18 +28,21 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 ```
 
+The action runs `butler login` with the `api-key` to check it, but doesn't save it, so later butler steps still need `BUTLER_API_KEY`. The post step runs `butler logout` and deletes the itch config directory.
+
 ### inputs
 
 | name | description | required |
 | ---- | ----------- | -------- |
 | `api-key` | An [api key for your itch.io account](https://itch.io/user/settings/api-keys) | true |
-| `version` | The version of butler to install. Defaults to `latest`. | false |
-| `self-update` | Update butler to the latest version. Defaults to `true`. | false |
+| `version` | The version of butler to install, as `x.y.z` (a leading `v` is allowed). Defaults to `latest`. | false |
 
 ### outputs
 
+- `path`: The full path to the butler executable.
+- `version`: The installed butler version.
+
 ### environment variables
 
-- `BUTLER_PATH`: The `butler` directory location.
+- `BUTLER_PATH`: The full path to the butler executable.
 - `BUTLER_DIR`: The directory where butler is installed.
-
