@@ -23,20 +23,22 @@ const main = async () => {
             }
         } else {
             await exec.exec('butler', ['logout']);
-            let cacheDir = '';
+            let configDir = '';
             switch (process.platform) {
                 case 'darwin':
-                    cacheDir = path.join(os.homedir(), 'Library', 'Application Support', 'itch');
+                    configDir = path.join(os.homedir(), 'Library', 'Application Support', 'itch');
                     break;
                 default:
-                    cacheDir = path.join(os.homedir(), '.config', 'itch');
+                    configDir = path.join(os.homedir(), '.config', 'itch');
                     break;
             }
+            // only butler's own credentials: the itch config folder is shared with the itch app on self-hosted runners
+            const credsPath = path.join(configDir, 'butler_creds');
             try {
-                if (!fs.existsSync(cacheDir)) { return; }
-                await io.rmRF(cacheDir);
+                if (!fs.existsSync(credsPath)) { return; }
+                await io.rmRF(credsPath);
             } catch (error) {
-                core.error(`Failed to remove ${cacheDir}`);
+                core.error(`Failed to remove ${credsPath}`);
             }
         }
     } catch (error) {
