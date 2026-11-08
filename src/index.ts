@@ -1,10 +1,10 @@
-import core = require('@actions/core');
-import exec = require('@actions/exec');
-import io = require('@actions/io');
-import setup = require('./setup');
-import fs = require('fs');
-import os = require('os');
-import path = require('path');
+import * as core from '@actions/core';
+import * as exec from '@actions/exec';
+import * as io from '@actions/io';
+import * as setup from './setup';
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
 
 const IS_POST = !!core.getState('isPost');
 
@@ -23,20 +23,22 @@ const main = async () => {
             }
         } else {
             await exec.exec('butler', ['logout']);
-            let cacheDir = '';
+            let configDir = '';
             switch (process.platform) {
                 case 'darwin':
-                    cacheDir = path.join(os.homedir(), 'Library', 'Application Support', 'itch');
+                    configDir = path.join(os.homedir(), 'Library', 'Application Support', 'itch');
                     break;
                 default:
-                    cacheDir = path.join(os.homedir(), '.config', 'itch');
+                    configDir = path.join(os.homedir(), '.config', 'itch');
                     break;
             }
+            // only butler's own credentials: the itch config folder is shared with the itch app on self-hosted runners
+            const credsPath = path.join(configDir, 'butler_creds');
             try {
-                if (!fs.existsSync(cacheDir)) { return; }
-                await io.rmRF(cacheDir);
+                if (!fs.existsSync(credsPath)) { return; }
+                await io.rmRF(credsPath);
             } catch (error) {
-                core.error(`Failed to remove ${cacheDir}`);
+                core.error(`Failed to remove ${credsPath}`);
             }
         }
     } catch (error) {
