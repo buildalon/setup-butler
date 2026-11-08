@@ -1,10 +1,10 @@
-import tc = require('@actions/tool-cache');
-import core = require('@actions/core');
-import exec = require('@actions/exec');
-import crypto = require('crypto');
-import path = require('path');
-import fs = require('fs');
-import os = require('os');
+import * as tc from '@actions/tool-cache';
+import * as core from '@actions/core';
+import * as exec from '@actions/exec';
+import * as crypto from 'crypto';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as os from 'os';
 
 const butler = 'butler';
 const BUTLER_PATH = 'BUTLER_PATH';

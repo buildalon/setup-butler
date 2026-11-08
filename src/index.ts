@@ -1,10 +1,10 @@
-import core = require('@actions/core');
-import exec = require('@actions/exec');
-import io = require('@actions/io');
-import setup = require('./setup');
-import fs = require('fs');
-import os = require('os');
-import path = require('path');
+import * as core from '@actions/core';
+import * as exec from '@actions/exec';
+import * as io from '@actions/io';
+import * as setup from './setup';
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
 
 const IS_POST = !!core.getState('isPost');
 
